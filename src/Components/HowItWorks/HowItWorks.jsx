@@ -29,6 +29,9 @@ const HowItWorks = () => {
     <section className="py-12 bg-white">
       <div className="max-w-5xl mx-auto text-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-6">How It Works</h2>
+        <p className="text-lg text-gray-600 mb-6">
+          Get started in 4 simple steps.
+        </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {steps.map((step, index) => (
             <div
