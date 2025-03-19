@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const jobs = [
   { title: "Product Redesign", location: "2708 Scenic Way, IL 62373", type: "Full Time" },
   { title: "New Product Mockup", location: "2708 Scenic Way, IL 62373", type: "Full Time" },
@@ -12,10 +14,9 @@ const jobs = [
 const JobCard = ({ title, location, type }) => {
   return (
     <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200 relative">
-      <span className={`absolute top-2 left-2 px-3 py-1 text-sm font-bold rounded ${
-        type === "Full Time" ? "bg-green-100 text-green-700" :
-        type === "Part Time" ? "bg-yellow-100 text-yellow-700" : "bg-pink-100 text-pink-700" 
-      }`}>{type}</span>
+      <span className={`absolute top-2 left-2 px-3 py-1 text-sm font-bold rounded ${type === "Full Time" ? "bg-green-100 text-green-700" :
+          type === "Part Time" ? "bg-yellow-100 text-yellow-700" : "bg-pink-100 text-pink-700"
+        }`}>{type}</span>
       <div className="flex flex-col items-center text-center">
         <div className="w-16 h-16 bg-gray-200 rounded-full mb-4"></div>
         <h3 className="text-lg font-semibold">{title}</h3>
@@ -38,6 +39,11 @@ const LatestJobs = () => {
             <JobCard key={index} {...job} />
           ))}
         </div>
+      </div>
+      <div className="text-center mt-8">
+        <Link to={'/allJobs'} className="px-6 py-3 bg-blue-500 text-white rounded-full font-semibold hover:bg-blue-600 transition">
+          See More Jobs →
+        </Link>
       </div>
     </section>
   );
