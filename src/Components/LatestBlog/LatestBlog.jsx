@@ -27,7 +27,7 @@ const blogs = [
 const LatestBlog = () => {
   return (
     <div className="max-w-6xl mx-auto py-12 px-6">
-      <h1 className="text-4xl font-extrabold text-gray-900 text-center mb-6">Latest Blog & News</h1>
+      <h1 className="text-4xl font-bold text-gray-900 text-center mb-6">Latest Blog & News</h1>
       <p className="text-gray-600 text-center mb-10">
         Search all the open positions on the web. Get your own personalized salary estimate. Read reviews on over 30,000+ companies worldwide.
       </p>

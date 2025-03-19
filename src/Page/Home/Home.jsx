@@ -4,6 +4,8 @@ import LatestJobs from '../../Components/LatestJobs/LatestJobs'
 import PopularCategories from '../../Components/PopularCategory/PopularCategory'
 import Company from '../../Components/Company/Company'
 import LatestBlog from '../../Components/LatestBlog/LatestBlog'
+import Testimonials from '../../Components/Testimonials/Testimonials'
+import HowItWorks from '../../Components/HowItWorks/HowItWorks'
 
 const Home = () => {
   return (
@@ -12,9 +14,11 @@ const Home = () => {
       <LatestJobs/>
       <PopularCategories/>
       <Company/>
+      <HowItWorks/>
+      <Testimonials/>
       <LatestBlog/>
     </div>
   )
 }
 
-export default Home
+export default Home;
