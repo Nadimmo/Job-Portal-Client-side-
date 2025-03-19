@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FaFacebook,
   FaGoogle,
@@ -30,11 +30,21 @@ const AllCompanies = () => {
     { name: 'Whatsapp', icon: <FaWhatsapp />, location: 'Jordan', jobs: 76 },
   ];
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 6;
+  // pagination
+  const totalPages = Math.ceil(companies.length / itemsPerPage)
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentPosts = companies.slice(indexOfFirstItem, indexOfLastItem)
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="container mx-auto py-8 pt-28">
       <h1 className="text-4xl font-bold text-center mb-10">Discover our latest digital marketing companies</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-10">
-        {companies.map((company, index) => (
+        {currentPosts.map((company, index) => (
           <div key={index} className="bg-white rounded-lg shadow-md p-6 text-center">
             <div className="text-4xl mb-4 text-blue-500 flex justify-center items-center">{company.icon}</div>
             <h3 className="text-lg font-semibold mb-2">{company.name}</h3>
@@ -47,7 +57,37 @@ const AllCompanies = () => {
           </div>
         ))}
       </div>
+      {/* Pagination Controls */}
+      <div className="flex justify-center items-center space-x-2 mt-6">
+        <button
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400"
+        >
+          Prev
+        </button>
 
+        {[...Array(totalPages)].map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToPage(index + 1)}
+            className={`px-4 py-2 rounded-lg ${currentPage === index + 1
+              ? "bg-blue-600 text-white"
+              : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+              }`}
+          >
+            {index + 1}
+          </button>
+        ))}
+
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400"
+        >
+          Next
+        </button>
+      </div>
       <div className='lg:flex justify-around items-center mx-10 mt-10 gap-6 '>
         {/* left side accordion */}
         <div className='lg:mt-0 mt-4'>
