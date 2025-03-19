@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Register() {
     const [formData, setFormData] = useState({
@@ -86,9 +87,9 @@ function Register() {
                     </h2>
                     <p className="mt-2 text-center text-sm text-gray-600">
                         Or{' '}
-                        <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                        <Link to={'/login'}  className="font-medium text-indigo-600 hover:text-indigo-500">
                             login to your account
-                        </a>
+                        </Link>
                     </p>
                 </div>
 
@@ -209,7 +210,7 @@ function Register() {
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                             type="submit"
                         >
-                            Register
+                            Sing Up
                         </button>
                         {/* You can add a link to login here if needed */}
                         {/* <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">

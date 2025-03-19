@@ -6,6 +6,7 @@ import {
 import Root from '../Root/Root';
 import About from '../Page/About/About';
 import Register from '../Page/Register/Register';
+import Login from '../Page/Login/Login';
 
 
 const Route = createBrowserRouter([
@@ -24,6 +25,10 @@ const Route = createBrowserRouter([
             {
                 path:'/register', 
                 element: <Register/>
+            },
+            {
+                path:'/login', 
+                element: <Login/>
             }
         ]
     }
