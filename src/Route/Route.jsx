@@ -9,6 +9,8 @@ import Register from '../Page/Register/Register';
 import Login from '../Page/Login/Login';
 import AllJobs from '../Page/AllJobs/AllJobs';
 import AllCompanies from '../Page/AllCompanies/AllCompanies';
+import AppliedJobs from '../Page/Dashboard/AppliedJobs/AppliedJobs';
+import Dashboard from './Dashboard';
 
 
 const Route = createBrowserRouter([
@@ -39,6 +41,16 @@ const Route = createBrowserRouter([
             {
                 path:'/allCompanies',
                 element: <AllCompanies/>
+            }
+        ]
+    },
+    {
+        path:"/dashboard",
+        element: <Dashboard/>,
+        children: [
+            {
+                path:"appliedJobs",
+                element: <AppliedJobs/>
             }
         ]
     }
