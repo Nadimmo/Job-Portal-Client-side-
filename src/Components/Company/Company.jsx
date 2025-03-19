@@ -1,6 +1,7 @@
 import React from "react";
 import { FaAndroid, FaFacebook, FaGoogle, FaLinkedin, FaSpotify } from "react-icons/fa";
 import { SiLenovo } from "react-icons/si";
+import { Link } from "react-router-dom";
 
 const companies = [
     { name: "Facebook", vacancies: 40, logo: <FaFacebook /> },
@@ -46,9 +47,9 @@ const Company = () => {
             </div>
             {/* CTA Button */}
             <div className="text-center mt-8">
-                <button className="px-6 py-3 bg-blue-500 text-white rounded-full font-semibold hover:bg-blue-600 transition">
+                <Link to={'/allCompanies'} className="px-6 py-3 bg-blue-500 text-white rounded-full font-semibold hover:bg-blue-600 transition">
                     See More Companies →
-                </button>
+                </Link>
             </div>
         </div>
     );
