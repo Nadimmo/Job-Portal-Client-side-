@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaRegLifeRing, FaRocket, FaClock, FaBriefcase, FaShieldAlt, FaUsersCog, FaFacebook, FaLinkedin, FaTwitter } from 'react-icons/fa'; // Import icons
+import { Link } from 'react-router-dom';
 
 // Sample JSON Data (you can load this from a separate file)
 const data = {
@@ -124,7 +125,9 @@ const About = () => {
 
       {/* FAQs Section with Accordion */}
       <section className="mb-16">
-        <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
+        <h2 className="text-3xl font-bold text-center my-3">Frequently Asked Questions</h2>
+        <p className='text-md text-gray-400 py-3 text-center'>Search all the open positions on the web. <br />Get your own personalized salary estimate. Read reviews on over 30000+ companies worldwide.</p>
+
         <div>
           {data.faqs.map((faq, index) => (
             <FaqCard key={faq.question} {...faq} index={index} />
@@ -138,9 +141,9 @@ const About = () => {
         <p className="text-lg text-gray-600 mb-6">
           We're here to help. Feel free to contact us for any inquiries or assistance you may need.
         </p>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-300 cursor-pointer">
+        <Link to={'/contact'} className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-300 cursor-pointer">
           Contact Us
-        </button>
+        </Link>
       </section>
     </div>
   );

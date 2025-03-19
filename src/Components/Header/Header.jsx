@@ -28,7 +28,7 @@ const Header = () => {
                         {Links}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-2xl font-bold">Wellfound</a>
+                <Link to={'/'} className=" text-2xl font-bold">Wellfound</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
