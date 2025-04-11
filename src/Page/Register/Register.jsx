@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
 
 function Register() {
+    const { signUp } = useContext(AuthContext);
+    // Assuming you have a useAuth hook to access the AuthContext]
+
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -63,6 +68,29 @@ function Register() {
 
         if (validateForm()) {
             // In a real application, you would make an API call here to register the user
+            signUp(formData.email, formData.password)
+                .then((userCredential) => {
+                    if (userCredential.user) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Registration Successful',
+                            text: 'Please check your email to verify your account.',
+                        });
+                    }
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.error('Error during registration:', errorCode, errorMessage);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Registration Failed',
+                        text: errorMessage,
+                    });
+                });
+
+
+
             console.log('Form submitted:', formData);
             setSuccessMessage('Registration successful! Please check your email to verify.');
             setFormData({
@@ -87,7 +115,7 @@ function Register() {
                     </h2>
                     <p className="mt-2 text-center text-sm text-gray-600">
                         Or{' '}
-                        <Link to={'/login'}  className="font-medium text-indigo-600 hover:text-indigo-500">
+                        <Link to={'/login'} className="font-medium text-indigo-600 hover:text-indigo-500">
                             login to your account
                         </Link>
                     </p>
