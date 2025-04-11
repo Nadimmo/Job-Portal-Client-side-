@@ -54,10 +54,10 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                {user ? <><button onClick={handleSignOut} className="font-semibold text-lg btn   transition duration-200">Sign Out</button></> : <><Link to={'/login'} className="font-semibold text-lg hover:text-gray-300 transition duration-200">Login</Link></>}
+                {user ? <><button onClick={handleSignOut} className="font-semibold text-lg   transition duration-200 hover:text-blue-500 cursor-pointer bg-gray-800  border-none outline-none">Sign Out</button></> : <><Link to={'/login'} className="font-semibold text-lg hover:text-gray-300 transition duration-200">Login</Link></>}
             </div>
         </div>
-    );
+    );s
 }
 
 export default Header;
