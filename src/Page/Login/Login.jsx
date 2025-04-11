@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import eye icons from react-icons
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
 
 function Login() {
+    const { signIn } = useContext(AuthContext)
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -47,22 +51,29 @@ function Login() {
 
         if (validateForm()) {
             // In a real application, you would make an API call to authenticate the user
-            console.log('Login form submitted:', formData);
-            // Simulate a successful login (replace with actual API call)
-            setTimeout(() => {
-                // In a real app, you'd store a token and redirect
-                alert('Login successful!');
-                setFormData({ email: '', password: '' });
-                setErrors({});
-            }, 1000);
+            signIn(formData.email, formData.password)
+                .then((result) => {
+                    if (result.user) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Login successful!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        setFormData({ email: '', password: '' });
+                        setErrors({});
+                        navigate("/")
+                    }
+                })
+                .catch((error) => {
+                    console.error('Login error:', error);
+                    setErrorMessage('Invalid email or password. Please try again.');
+                });
+
         } else {
             setErrorMessage('Please correct the errors in the form.');
         }
-    };
-
-    const handleForgotPassword = () => {
-        alert('Forgot password functionality will be implemented here.');
-        // In a real app, you would navigate to a forgot password page or show a modal.
     };
 
 
@@ -152,7 +163,6 @@ function Login() {
 
                         <div className="text-sm">
                             <button
-                                onClick={handleForgotPassword}
                                 className="font-medium text-indigo-600 hover:text-indigo-500"
                             >
                                 Forgot your password?

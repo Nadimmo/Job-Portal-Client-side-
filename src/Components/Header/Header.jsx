@@ -1,8 +1,24 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import './Header.css'; // Import the CSS file for styles
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const Header = () => {
+    const { user, logOut } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+
+    const handleSignOut = () => {
+        logOut()
+            .then(() => {
+                navigate('/')
+            })
+            .catch((error) => {
+                console.error('Error signing out:', error);
+            });
+    };
+
+
     const Links = (
         <>
             <li><NavLink to={'/'} className="nav-link">Home</NavLink></li>
@@ -13,13 +29,15 @@ const Header = () => {
         </>
     );
 
+
+
     return (
         <div className="navbar bg-gray-800 text-white shadow-lg fixed z-10 w-full">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> 
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> 
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
                         </svg>
                     </div>
                     <ul
@@ -36,7 +54,7 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to={'/login'} className="font-semibold text-lg hover:text-gray-300 transition duration-200">Login</Link>
+                {user ? <><button onClick={handleSignOut} className="font-semibold text-lg btn   transition duration-200">Sign Out</button></> : <><Link to={'/login'} className="font-semibold text-lg hover:text-gray-300 transition duration-200">Login</Link></>}
             </div>
         </div>
     );
