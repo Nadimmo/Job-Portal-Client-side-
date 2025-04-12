@@ -6,7 +6,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
 
 function Register() {
-    const { signUp, profileUpdate, googleSignIn } = useContext(AuthContext);
+    const { signUp, profileUpdate, googleSignIn,  facebookSignIn } = useContext(AuthContext);
     const navigate = useNavigate()
     // Assuming you have a useAuth hook to access the AuthContext]
 
@@ -110,7 +110,7 @@ function Register() {
 
 
     const handleGoogle = () => {
-        
+
         googleSignIn()
             .then((result) => {
                 const name = result.user.displayName;
@@ -134,6 +134,32 @@ function Register() {
                 });
             });
     }
+
+    // const handleFacebook = () => {
+    //     facebookSignIn()
+    //         .then((result) => {
+    //             const name = result.user.displayName;
+    //             const photoURL = result.user.photoURL;
+
+    //             profileUpdate(name, photoURL)
+    //                 .then(res => {
+    //                     setSuccessMessage('Facebook sign-in successful!');
+    //                     navigate('/')
+    //                 })
+
+    //         })
+    //         .catch((error) => {
+    //             const errorCode = error.code;
+    //             const errorMessage = error.message;
+    //             console.error('Error during Facebook sign-in:', errorCode, errorMessage);
+    //             Swal.fire({
+    //                 icon: 'error',
+    //                 title: 'Facebook Sign-In Failed',
+    //                 text: errorMessage,
+    //             });
+    //         });
+    // }   
+
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
