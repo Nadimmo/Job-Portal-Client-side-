@@ -6,6 +6,7 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
 const Header = () => {
     const { user, logOut } = useContext(AuthContext)
     const navigate = useNavigate()
+    // console.log(user.metadata.createdAt);
 
 
     const handleSignOut = () => {

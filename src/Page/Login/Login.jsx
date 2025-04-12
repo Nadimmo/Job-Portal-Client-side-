@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import eye icons from react-icons
+import { FaEye, FaEyeSlash, FaFacebook } from 'react-icons/fa'; // Import eye icons from react-icons
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
+import { FcGoogle } from 'react-icons/fc';
 
 function Login() {
-    const { signIn } = useContext(AuthContext)
+    const { signIn, googleSignIn, profileUpdate } = useContext(AuthContext)
     const navigate = useNavigate()
     const [formData, setFormData] = useState({
         email: '',
@@ -82,6 +83,32 @@ function Login() {
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
     };
+
+
+    const handleGoogle = () => {
+        googleSignIn()
+            .then((result) => {
+                const name = result.user.displayName;
+                const image = result.user.photoURL;
+
+                profileUpdate(name, image)
+                    .then(res => {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Login successful!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        navigate("/")
+
+                    })
+            })
+            .catch((error) => {
+                console.error('Google login error:', error);
+                setErrorMessage('Failed to sign in with Google. Please try again.');
+            });
+    }
 
     return (
         <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -169,11 +196,24 @@ function Login() {
                             </button>
                         </div>
                     </div>
-
+                    <div  className='divider'> or sign in with </div>
+                    {/* Social Logins */}
+                    <div className="grid lg:grid-cols-2 gap-2">
+                 
+                        <button onClick={handleGoogle} className="flex items-center justify-center w-full py-2 border rounded-lg hover:bg-gray-100 transition cursor-pointer">
+                            <FcGoogle
+                                className="mr-2 text-2xl" />
+                            Sign in with Google
+                        </button>
+                        <button className="flex items-center justify-center w-full py-2 border rounded-lg hover:bg-gray-100 transition cursor-pointer lg:mt-0 mt-4">
+                            <FaFacebook className="mr-1 text-blue-500 text-2xl" />
+                            Sign in with Facebook
+                        </button>
+                    </div>
                     <div>
                         <button
                             type="submit"
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer"
                         >
                             <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                                 {/* You can add an icon here if desired */}

@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
+import { FcGoogle } from 'react-icons/fc';
+import { FaFacebook } from 'react-icons/fa';
 
 function Register() {
-    const { signUp } = useContext(AuthContext);
+    const { signUp, profileUpdate, googleSignIn } = useContext(AuthContext);
+    const navigate = useNavigate()
     // Assuming you have a useAuth hook to access the AuthContext]
 
     const [formData, setFormData] = useState({
@@ -66,16 +69,28 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const name = formData.firstName + ' ' + formData.lastName;
+
         if (validateForm()) {
             // In a real application, you would make an API call here to register the user
             signUp(formData.email, formData.password)
+
                 .then((userCredential) => {
                     if (userCredential.user) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Registration Successful',
-                            text: 'Please check your email to verify your account.',
-                        });
+                        profileUpdate(name)
+                            .then((res) => {
+                                setSuccessMessage('Registration successful! Please check your email to verify.');
+                                setFormData({
+                                    firstName: '',
+                                    lastName: '',
+                                    email: '',
+                                    password: '',
+                                    confirmPassword: '',
+                                    userType: 'jobseeker',
+                                });
+                                setErrors({});
+                                navigate('/')
+                            })
                     }
                 })
                 .catch((error) => {
@@ -90,21 +105,35 @@ function Register() {
                 });
 
 
-
-            console.log('Form submitted:', formData);
-            setSuccessMessage('Registration successful! Please check your email to verify.');
-            setFormData({
-                firstName: '',
-                lastName: '',
-                email: '',
-                password: '',
-                confirmPassword: '',
-                userType: 'jobseeker',
-            });
-            setErrors({});
-            // You would typically redirect the user or show a success message
         }
     };
+
+
+    const handleGoogle = () => {
+        
+        googleSignIn()
+            .then((result) => {
+                const name = result.user.displayName;
+                const photoURL = result.user.photoURL;
+
+                profileUpdate(name, photoURL)
+                    .then(res => {
+                        setSuccessMessage('Google sign-in successful!');
+                        navigate('/')
+                    })
+
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.error('Error during Google sign-in:', errorCode, errorMessage);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Google Sign-In Failed',
+                    text: errorMessage,
+                });
+            });
+    }
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -233,9 +262,23 @@ function Register() {
                         {errors.userType && <p className="text-red-500 text-xs italic">{errors.userType}</p>}
                     </div>
 
+                    {/* Social Logins */}
+                    <div className="lg:flex justify-between  gap-4
+                    ">
+                        <button onClick={handleGoogle} className="flex items-center justify-center w-full py-2 border rounded-lg hover:bg-gray-100 transition cursor-pointer">
+                            <FcGoogle
+                                className="mr-2 text-2xl" />
+                            Sign in with Google
+                        </button>
+                        <button className="flex items-center justify-center w-full py-2 border rounded-lg hover:bg-gray-100 transition cursor-pointer lg:mt-0 mt-4">
+                            <FaFacebook className="mr-2 text-blue-500 text-2xl" />
+                            Sign in with Facebook
+                        </button>
+                    </div>
+                    <br />
                     <div className="flex items-center justify-between">
                         <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer"
                             type="submit"
                         >
                             Sing Up
