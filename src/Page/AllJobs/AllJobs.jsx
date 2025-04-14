@@ -1,85 +1,14 @@
 import React, { useState } from 'react';
-
-const jobs = [
-    {
-        title: "Product Redesign",
-        location: "2708 Scenic Way, IL 62373",
-        type: "Full Time"
-    },
-    {
-        title: "New Product Mockup",
-        location: "2708 Scenic Way, IL 62373",
-        type: "Full Time"
-    },
-    {
-        title: "Custom Php Developer",
-        location: "3765 C Street, Worcester",
-        type: "Part Time"
-    },
-    {
-        title: "Wordpress Developer",
-        location: "2719 Duff Avenue, Winooski",
-        type: "Part Time"
-    },
-    {
-        title: "Web Maintenance",
-        location: "2708 Scenic Way, IL 62373",
-        type: "Internship"
-    },
-    {
-        title: "Photoshop Designer",
-        location: "2865 Emma Street, Lubbock",
-        type: "Part Time"
-    },
-    {
-        title: "HTML5 & CSS3 Coder",
-        location: "2719 Burnside Avenue, Logan",
-        type: "Full Time"
-    },
-    {
-        title: ".Net Developer",
-        location: "3815 Forest Drive, Alexandria",
-        type: "Part Time"
-    },
-    {
-        "title": "Senior Software Engineer (.NET)",
-        "location": "Dhaka, Bangladesh",
-        "type": "Hybrid"
-    },
-    {
-        "title": ".NET Developer",
-        "location": "New York City, USA",
-        "type": "Remote"
-    },
-    {
-        "title": "Junior .NET Programmer",
-        "location": "Sylhet, Bangladesh",
-        "type": "On Site"
-    },
-    {
-        "title": "Lead .NET Architect",
-        "location": "London, UK",
-        "type": "Hybrid"
-    },
-    {
-        "title": ".NET Web Application Developer",
-        "location": "California, USA",
-        "type": "Remote"
-    },
-    {
-        "title": ".NET Support Specialist",
-        "location": "Chittagong, Bangladesh",
-        "type": "On Site"
-    }
-];
+import useAllJobs from '../../Components/Hooks/useAllJobs';
 
 const AllJobs = () => {
+    const  [allJobs] = useAllJobs()
     const [searchLocation, setSearchLocation] = useState('');
     const [searchType, setSearchType] = useState('');
     const [currentPage, setCurrentPage] = useState(1)
     const itemsPerPage = 6;
     
-    const filteredJobs = jobs.filter(job =>
+    const filteredJobs = allJobs.filter(job =>
         (searchLocation === '' || job.location.toLowerCase().includes(searchLocation.toLowerCase())) &&
         (searchType === '' || job.type === searchType));
 
@@ -91,6 +20,11 @@ const AllJobs = () => {
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+    const goToPage = (pageNumber) => {
+        if (pageNumber < 1 || pageNumber > totalPages) return;
+        setCurrentPage(pageNumber);
+    }
+    
 
 
     return (

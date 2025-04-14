@@ -8,7 +8,7 @@ const jobs = [
   { title: "Web Maintenance", location: "2708 Scenic Way, IL 62373", type: "Internship" },
   { title: "Photoshop Designer", location: "2865 Emma Street, Lubbock", type: "Part Time" },
   { title: "HTML5 & CSS3 Coder", location: "2719 Burnside Avenue, Logan", type: "Full Time" },
-  { title: ".Net Developer", location: "3815 Forest Drive, Alexandria", type: "Part Time" },
+  { title: "Net Developer", location: "3815 Forest Drive, Alexandria", type: "Part Time" },
 ];
 
 const JobCard = ({ title, location, type }) => {

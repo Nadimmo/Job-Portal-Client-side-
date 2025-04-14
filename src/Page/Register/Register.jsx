@@ -287,7 +287,7 @@ function Register() {
                         </div>
                         {errors.userType && <p className="text-red-500 text-xs italic">{errors.userType}</p>}
                     </div>
-
+                    <div  className='divider'> or sign in with </div>
                     {/* Social Logins */}
                     <div className="lg:flex justify-between  gap-4
                     ">
