@@ -37,7 +37,7 @@ const Testimonials = () => {
               </div>
             </SwiperSlide>
           ))}
-        </Swiper>
+        </Swiper>``
       </div>
     </section>
   );
