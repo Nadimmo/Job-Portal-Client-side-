@@ -11,6 +11,8 @@ import AllJobs from '../Page/AllJobs/AllJobs';
 import AllCompanies from '../Page/AllCompanies/AllCompanies';
 import AppliedJobs from '../Page/Dashboard/AppliedJobs/AppliedJobs';
 import Dashboard from './Dashboard';
+import AddNewJob from '../Page/Dashboard/AddNewJob/AddNewJob';
+import PostCompany from '../Page/Dashboard/PostCompany/PostCompany';
 
 
 const Route = createBrowserRouter([
@@ -51,6 +53,14 @@ const Route = createBrowserRouter([
             {
                 path:"appliedJobs",
                 element: <AppliedJobs/>
+            },
+            {
+                path:"newJob",
+                element: <AddNewJob/>
+            },
+            {
+                path:"newCompany",
+                element: <PostCompany/>
             }
         ]
     }
