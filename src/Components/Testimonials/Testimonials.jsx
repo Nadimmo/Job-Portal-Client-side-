@@ -3,29 +3,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import useReviews from "../Hooks/useReviews";
 
-const testimonials = [
-  {
-    name: "John Doe",
-    role: "Software Engineer",
-    feedback: "This platform helped me land my dream job! Highly recommend it.",
-    image: "https://randomuser.me/api/portraits/men/1.jpg",
-  },
-  {
-    name: "Sarah Johnson",
-    role: "HR Manager",
-    feedback: "We found amazing candidates through this job portal. Fantastic experience!",
-    image: "https://randomuser.me/api/portraits/women/2.jpg",
-  },
-  {
-    name: "Michael Smith",
-    role: "UI/UX Designer",
-    feedback: "The job recommendations were spot on. The application process was seamless.",
-    image: "https://randomuser.me/api/portraits/men/3.jpg",
-  },
-];
 
 const Testimonials = () => {
+  const [testimonials] = useReviews()
   return (
     <section className="py-12 bg-gray-100">
       <div className="max-w-4xl mx-auto text-center">
