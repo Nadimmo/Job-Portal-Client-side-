@@ -82,7 +82,7 @@ const AllJobs = () => {
                 <button
                     onClick={() => paginate(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400"
+                    className="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400 cursor-pointer"
                 >
                     Prev
                 </button>
@@ -93,7 +93,7 @@ const AllJobs = () => {
                         onClick={() => goToPage(index + 1)}
                         className={`px-4 py-2 rounded-lg ${currentPage === index + 1
                             ? "bg-blue-600 text-white"
-                            : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+                            : "bg-gray-200 text-gray-600 hover:bg-gray-300 cursor-pointer"
                             }`}
                     >
                         {index + 1}
@@ -103,7 +103,7 @@ const AllJobs = () => {
                 <button
                     onClick={() => paginate(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400"
+                    className="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400 cursor-pointer"
                 >
                     Next
                 </button>

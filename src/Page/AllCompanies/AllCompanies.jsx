@@ -12,33 +12,40 @@ import {
   FaLocationArrow,
 } from 'react-icons/fa';
 import { SiCircleci, SiLenovo, SiNvidia } from 'react-icons/si';
+import useAllCompany from '../../Components/Hooks/useAllCompany';
 
 
 const AllCompanies = () => {
-  const companies = [
-    { name: 'Facebook', icon: <FaFacebook />, location: 'Australia', jobs: 40 },
-    { name: 'Google', icon: <FaGoogle />, location: 'Russia', jobs: 70 },
-    { name: 'Android', icon: <FaAndroid />, location: 'Germany', jobs: 98 },
-    { name: 'Lenovo', icon: <SiLenovo />, location: 'Italy', jobs: 86 },
-    { name: 'Spotify', icon: <FaSpotify />, location: 'France', jobs: 45 },
-    { name: 'Linkedin', icon: <FaLinkedin />, location: 'Greece', jobs: 60 },
-    { name: 'Circle CI', icon: <SiCircleci />, location: 'China', jobs: 80 },
-    { name: 'Skype', icon: <FaSkype />, location: 'Japan', jobs: 65 },
-    { name: 'Snapchat', icon: <FaSnapchat />, location: 'Singapore', jobs: 43 },
-    { name: 'Nvidia', icon: <SiNvidia />, location: 'United States', jobs: 76 },
-    { name: 'Telegram', icon: <FaTelegram />, location: 'Spain', jobs: 93 },
-    { name: 'Whatsapp', icon: <FaWhatsapp />, location: 'Jordan', jobs: 76 },
-  ];
+  const iconMap = {
+    FaFacebook: <FaFacebook />,
+    FaGoogle: <FaGoogle />,
+    FaAndroid: <FaAndroid />,
+    SiLenovo: <SiLenovo />,
+    FaSpotify: <FaSpotify />,
+    FaLinkedin: <FaLinkedin />,
+    SiCircleci: <SiCircleci />,
+    FaSkype: <FaSkype />,
+    FaSnapchat: <FaSnapchat />,
+    SiNvidia: <SiNvidia />,
+    FaTelegram: <FaTelegram />,
+    FaWhatsapp: <FaWhatsapp />
+  };
+  
+  const [allCompanies] = useAllCompany()
 
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 6;
   // pagination
-  const totalPages = Math.ceil(companies.length / itemsPerPage)
+  const totalPages = Math.ceil(allCompanies.length / itemsPerPage)
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentPosts = companies.slice(indexOfFirstItem, indexOfLastItem)
+  const currentPosts = allCompanies.slice(indexOfFirstItem, indexOfLastItem)
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const goToPage = (pageNumber) => {
+    if (pageNumber < 1 || pageNumber > totalPages) return;
+    setCurrentPage(pageNumber);
+  }
 
   return (
     <div className="container mx-auto py-8 pt-28">
@@ -46,7 +53,7 @@ const AllCompanies = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-10">
         {currentPosts.map((company, index) => (
           <div key={index} className="bg-white rounded-lg shadow-md p-6 text-center">
-            <div className="text-4xl mb-4 text-blue-500 flex justify-center items-center">{company.icon}</div>
+            <div className="text-4xl mb-4 text-blue-500 flex justify-center items-center">{iconMap[company.icon]}</div>
             <h3 className="text-lg font-semibold mb-2">{company.name}</h3>
             <p className="text-sm text-gray-600 mb-4">Digital Marketing Solutions for Tomorrow</p>
             <hr className='border border-gray-50 my-2' />
@@ -62,7 +69,7 @@ const AllCompanies = () => {
         <button
           onClick={() => paginate(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400"
+          className="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400 cursor-pointer"
         >
           Prev
         </button>
@@ -73,7 +80,7 @@ const AllCompanies = () => {
             onClick={() => goToPage(index + 1)}
             className={`px-4 py-2 rounded-lg ${currentPage === index + 1
               ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+              : "bg-gray-200 text-gray-600 hover:bg-gray-300 cursor-pointer"
               }`}
           >
             {index + 1}
@@ -83,7 +90,7 @@ const AllCompanies = () => {
         <button
           onClick={() => paginate(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400"
+          className="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg hover:bg-gray-300 disabled:bg-gray-100 disabled:text-gray-400  cursor-pointer"
         >
           Next
         </button>

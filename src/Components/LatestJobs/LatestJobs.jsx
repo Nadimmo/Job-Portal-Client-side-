@@ -1,15 +1,6 @@
 import { Link } from "react-router-dom";
+import useAllJobs from "../Hooks/useAllJobs";
 
-const jobs = [
-  { title: "Product Redesign", location: "2708 Scenic Way, IL 62373", type: "Full Time" },
-  { title: "New Product Mockup", location: "2708 Scenic Way, IL 62373", type: "Full Time" },
-  { title: "Custom Php Developer", location: "3765 C Street, Worcester", type: "Part Time" },
-  { title: "Wordpress Developer", location: "2719 Duff Avenue, Winooski", type: "Part Time" },
-  { title: "Web Maintenance", location: "2708 Scenic Way, IL 62373", type: "Internship" },
-  { title: "Photoshop Designer", location: "2865 Emma Street, Lubbock", type: "Part Time" },
-  { title: "HTML5 & CSS3 Coder", location: "2719 Burnside Avenue, Logan", type: "Full Time" },
-  { title: "Net Developer", location: "3815 Forest Drive, Alexandria", type: "Part Time" },
-];
 
 const JobCard = ({ title, location, type }) => {
   return (
@@ -30,12 +21,14 @@ const JobCard = ({ title, location, type }) => {
 };
 
 const LatestJobs = () => {
+  const [allJobs]  =  useAllJobs()
+
   return (
     <section className="py-12 bg-gray-100">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold text-center mb-6">Latest Jobs</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {jobs.map((job, index) => (
+          {allJobs.map((job, index) => (
             <JobCard key={index} {...job} />
           ))}
         </div>
