@@ -41,7 +41,7 @@ const PostCompany = () => {
           <div>
             <label className="block text-gray-700 font-semibold">Logo / Image URL</label>
             <input
-              type="text"
+              type="file"
               name="logo"
               value={formData.logo}
               onChange={handleChange}

@@ -21,7 +21,7 @@ const Dashboard = () => {
                       
                         <li><NavLink to='/dashboard/newCompany' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><IoMdAddCircle /> Post New Company</NavLink></li>
                         <li><NavLink to='/dashboard/newJob' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><IoMdAddCircle /> Post New Job</NavLink></li>
-                        <li><NavLink to='/dashboard/addAuthor' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><IoMdAddCircle /> Post Author</NavLink></li>
+                        <li><NavLink to='/dashboard/newBlogs' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><IoMdAddCircle /> Post Latest Blogs</NavLink></li>
                         <li><NavLink to='/dashboard/manageJobs' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaList /> Manage Jobs</NavLink></li>
                         <li><NavLink to='/dashboard/manageAuthors' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaUsers /> Manage Authors</NavLink></li>
                         <li><NavLink to='/dashboard/manageUsers' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#FFB22C] text-gray-900 hover:text-black transition duration-300'><FaUser /> Manage Users</NavLink></li>

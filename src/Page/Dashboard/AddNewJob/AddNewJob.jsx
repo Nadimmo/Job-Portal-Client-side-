@@ -44,7 +44,7 @@ const AddNewJob = () => {
           <option>Hybrid</option>
         </select>
 
-        <input name="image" type="url" placeholder="Company Logo URL" className="input" onChange={handleChange} />
+        <input name="image" type="file" placeholder="Company Logo URL" className="input" onChange={handleChange} />
 
         <input name="experienceLevel" type="text" placeholder="Experience Level (e.g. Mid)" className="input" onChange={handleChange} />
         <input name="education" type="text" placeholder="Education Requirement" className="input" onChange={handleChange} />
