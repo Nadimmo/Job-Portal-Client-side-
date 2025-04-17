@@ -53,9 +53,9 @@ const AllCompanies = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-10">
         {currentPosts.map((company, index) => (
           <div key={index} className="bg-white rounded-lg shadow-md p-6 text-center">
-            <div className="text-4xl mb-4 text-blue-500 flex justify-center items-center">{iconMap[company.icon]}</div>
+            <img src={company.icon} alt="" className="w-20 h-20 rounded-[50%] mx-auto"/>
             <h3 className="text-lg font-semibold mb-2">{company.name}</h3>
-            <p className="text-sm text-gray-600 mb-4">Digital Marketing Solutions for Tomorrow</p>
+            <p className="text-sm text-gray-600 mb-4">{company.title || "Digital Marketing Solutions for Tomorrow"}</p>
             <hr className='border border-gray-50 my-2' />
             <div className="flex justify-between items-center text-sm">
               <span className="text-gray-500 flex "> <FaLocationArrow className='mx-2 my-1' /> {company.location}</span>

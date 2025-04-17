@@ -68,7 +68,7 @@ const AllJobs = () => {
                             <div className="w-16 h-16 bg-gray-200 rounded-full mb-4"></div>
                             <h3 className="text-lg font-semibold">{job.title}</h3>
                             <p className="text-gray-500 text-sm">{job.location}</p>
-                            <button className="mt-4 px-4 py-2 border border-green-500 text-green-500 rounded hover:text-white hover:bg-green-500 transition">
+                            <button className="mt-4 px-4 py-2 border border-green-500 text-green-500 rounded hover:text-black hover:bg-green-500 transition  duration-300 cursor-pointer">
                                 APPLY NOW
                             </button>
                         </div>

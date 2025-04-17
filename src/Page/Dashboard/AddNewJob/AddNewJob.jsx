@@ -62,7 +62,7 @@ const AddNewJob = () => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Your job has been poste",
+          title: "Your new job has been poste",
           showConfirmButton: false,
           timer: 1500
         });
@@ -82,7 +82,7 @@ const AddNewJob = () => {
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-2xl rounded-2xl mt-20">
       <h2 className="text-3xl font-bold mb-6 text-center text-blue-600">Post a New Job</h2>
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <form onSubmit={handleSubmit} className="grid lg:grid-cols-2 md:grid-cols-2 gap-6">
         <input name="title" type="text" placeholder="Job Title" className="input" required />
         <input name="companyName" type="text" placeholder="Company Name" className="input"  required />
 
@@ -106,12 +106,9 @@ const AddNewJob = () => {
 
         <textarea name="requirements" placeholder="Job Requirements (comma separated)" className="textarea" ></textarea>
         <textarea name="responsibilities" placeholder="Job Responsibilities (comma separated)" className="textarea" ></textarea>
+        <textarea name="description" placeholder="Short Description" className="textarea h-24" ></textarea>
 
-        <div className="md:col-span-1  w-full">
-          <textarea name="description" placeholder="Short Description" className="textarea h-24" ></textarea>
-        </div>
-
-        <div className="md:col-span-1 text-center">
+        <div className="flex justify-center lg:justify-start text-center">
           <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition-all  cursor-pointer">
             Submit Job
           </button>
