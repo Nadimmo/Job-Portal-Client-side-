@@ -10,6 +10,7 @@ const LatestBlogsAndNews = () => {
     e.preventDefault();
     const form = e.target
     const title = form.title.value;
+    const  summary = form.summary.value;  
     const date = form.date.value;
     const image = form.image.files[0];
     const category = form.category.value;
@@ -25,6 +26,7 @@ const LatestBlogsAndNews = () => {
         const imageURL = res.data.data.url
         const info = {
           title,
+          summary,
           date,
           image: imageURL,
           category
@@ -50,7 +52,7 @@ const LatestBlogsAndNews = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-10 bg-white shadow-2xl rounded-2xl">
+    <div className="max-w-3xl mx-auto px-4 py-10 bg-white shadow-2xl rounded-2xl mt-20">
       <h2 className="text-3xl font-bold text-center text-blue-600 mb-8">Submit Latest Blog or News</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
