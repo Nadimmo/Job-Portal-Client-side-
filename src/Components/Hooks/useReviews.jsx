@@ -13,7 +13,7 @@ const useReviews = () => {
         }
 
     })
-    return [testimonials]
+    return {testimonials}
 }
 
 export default useReviews

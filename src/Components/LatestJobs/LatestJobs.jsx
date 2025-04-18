@@ -21,7 +21,7 @@ const JobCard = ({ title, location, type }) => {
 };
 
 const LatestJobs = () => {
-  const [allJobs]  =  useAllJobs()
+  const {allJobs}  =  useAllJobs()
 
   return (
     <section className="py-12 bg-gray-100">

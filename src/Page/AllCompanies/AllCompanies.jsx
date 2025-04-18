@@ -30,16 +30,16 @@ const AllCompanies = () => {
     FaTelegram: <FaTelegram />,
     FaWhatsapp: <FaWhatsapp />
   };
-  
-  const [allCompanies] = useAllCompany()
+
+  const { companies } = useAllCompany()
 
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 6;
   // pagination
-  const totalPages = Math.ceil(allCompanies.length / itemsPerPage)
+  const totalPages = Math.ceil(companies.length / itemsPerPage)
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentPosts = allCompanies.slice(indexOfFirstItem, indexOfLastItem)
+  const currentPosts = companies.slice(indexOfFirstItem, indexOfLastItem)
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const goToPage = (pageNumber) => {
@@ -53,7 +53,7 @@ const AllCompanies = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-10">
         {currentPosts.map((company, index) => (
           <div key={index} className="bg-white rounded-lg shadow-md p-6 text-center">
-            <img src={company.icon} alt="" className="w-20 h-20 rounded-[50%] mx-auto"/>
+            <img src={company.icon} alt="" className="w-20 h-20 rounded-[50%] mx-auto" />
             <h3 className="text-lg font-semibold mb-2">{company.name}</h3>
             <p className="text-sm text-gray-600 mb-4">{company.title || "Digital Marketing Solutions for Tomorrow"}</p>
             <hr className='border border-gray-50 my-2' />

@@ -3,14 +3,14 @@ import { useQuery } from '@tanstack/react-query'
 import useAxiosPublic from './useAxiosPublic'
 const useAllJobs = () => {
     const axiosPublic = useAxiosPublic()
-    const { data: allJobs = [] } = useQuery({
+    const { refetch, data: allJobs = [] } = useQuery({
         queryKey: ['allJobs'],
         queryFn: async () => {
             const res = await axiosPublic.get('/allJobs')
             return res.data
         }
     })
-    return [allJobs]
+    return {refetch, allJobs}
 }
 
 export default useAllJobs

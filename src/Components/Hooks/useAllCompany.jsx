@@ -12,7 +12,7 @@ const useAllCompany = () => {
         },
         
     })
-  return [companies]
+  return {companies}
 }
 
 export default useAllCompany

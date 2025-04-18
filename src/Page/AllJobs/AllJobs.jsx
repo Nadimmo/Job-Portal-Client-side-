@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useAllJobs from '../../Components/Hooks/useAllJobs';
 
 const AllJobs = () => {
-    const  [allJobs] = useAllJobs()
+    const  {allJobs} = useAllJobs()
     const [searchLocation, setSearchLocation] = useState('');
     const [searchType, setSearchType] = useState('');
     const [currentPage, setCurrentPage] = useState(1)

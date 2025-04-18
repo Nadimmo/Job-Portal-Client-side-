@@ -7,7 +7,7 @@ import useReviews from "../Hooks/useReviews";
 
 
 const Testimonials = () => {
-  const [testimonials] = useReviews()
+  const {testimonials} = useReviews()
   return (
     <section className="py-12 bg-gray-100">
       <div className="max-w-4xl mx-auto text-center">
