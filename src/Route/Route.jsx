@@ -16,6 +16,7 @@ import PostCompany from '../Page/Dashboard/PostCompany/PostCompany';
 import LatestBlogsAndNews from '../Page/Dashboard/LatestBlogsAndNews/LatestBlogsAndNews';
 import SendFeedback from '../Page/Dashboard/SendFeedbac/SendFeedbac';
 import ManageJobs from '../Page/Dashboard/ManageJobs/ManageJobs';
+import ManageBlogs from '../Page/Dashboard/ManageBlogs/ManageBlogs';
 
 
 const Route = createBrowserRouter([
@@ -76,6 +77,10 @@ const Route = createBrowserRouter([
             {
                 path:"manageJobs",
                 element: <ManageJobs/>
+            },
+            {
+                path:"manageBlogs",
+                element: <ManageBlogs/>
             }
         ]
     }

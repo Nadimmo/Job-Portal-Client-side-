@@ -1,23 +1,23 @@
 import React from 'react';
-import useAllJobs from '../../../Components/Hooks/useAllJobs';
+import useLatestBlogs from '../../../Components/Hooks/useLatestBlogs';
 import { Pencil, Trash2 } from 'lucide-react';
 
-const ManageJobs = () => {
-  const [allJobs] = useAllJobs();
+const ManageBlogs = () => {
+  const { blogs } = useLatestBlogs();
 
   return (
     <div className="max-w-6xl mx-auto py-12 px-6">
-      <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Manage All Jobs</h2>
+      <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Manage Blogs</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {allJobs.map((job) => (
+        {blogs.map((blog) => (
           <div
-            key={job._id}
+            key={blog._id}
             className="bg-white shadow-md rounded-xl p-6 transition-transform transform hover:scale-105 hover:shadow-lg"
           >
-            <h3 className="text-xl font-semibold text-gray-800">{job.title}</h3>
-            <p className="text-gray-600 mt-1">Company: <span className="font-medium">{job.companyName}</span></p>
-            <p className="text-gray-600">Location: <span className="font-medium">{job.location}</span></p>
+            <h3 className="text-xl font-semibold text-gray-800">{blog.title}</h3>
+            <p className="text-gray-600 mt-1">Date: <span className="font-medium">{blog.date}</span></p>
+            <p className="text-gray-600">Category: <span className="font-medium">{blog.category || 'Uncategorized'}</span></p>
 
             <div className="flex items-center gap-4 mt-4">
               <button
@@ -38,4 +38,4 @@ const ManageJobs = () => {
   );
 };
 
-export default ManageJobs;
+export default ManageBlogs;
