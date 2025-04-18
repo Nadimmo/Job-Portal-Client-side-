@@ -58,7 +58,7 @@ const PostCompany = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-10 px-4">
+    <div className="min-h-screen bg-white flex items-center justify-center py-10 px-4 mt-10">
       <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-3xl">
         <h2 className="text-3xl font-bold mb-6 text-center text-indigo-700">Post a New Company</h2>
         <form onSubmit={handleSubmit} className="space-y-4">

@@ -15,6 +15,7 @@ import AddNewJob from '../Page/Dashboard/AddNewJob/AddNewJob';
 import PostCompany from '../Page/Dashboard/PostCompany/PostCompany';
 import LatestBlogsAndNews from '../Page/Dashboard/LatestBlogsAndNews/LatestBlogsAndNews';
 import SendFeedback from '../Page/Dashboard/SendFeedbac/SendFeedbac';
+import ManageJobs from '../Page/Dashboard/ManageJobs/ManageJobs';
 
 
 const Route = createBrowserRouter([
@@ -71,6 +72,10 @@ const Route = createBrowserRouter([
             {
                 path:"newBlogs",
                 element: <LatestBlogsAndNews/>
+            },
+            {
+                path:"manageJobs",
+                element: <ManageJobs/>
             }
         ]
     }
