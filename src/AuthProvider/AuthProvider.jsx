@@ -1,17 +1,17 @@
 import { createContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword,  getAuth, GoogleAuthProvider, onAuthStateChanged, RecaptchaVerifier, signInWithEmailAndPassword, signInWithPhoneNumber, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from "../../firebase.config";
 
 
 
 export const AuthContext = createContext(null);
 const GoogleProvider = new GoogleAuthProvider();
-const FacebookProvider = new FacebookAuthProvider();
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null); 
+    const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const auth = getAuth(app); // Initialize Firebase Authentication and get a reference to the service
+    auth.settings.appVerificationDisabledForTesting = true;
 
 
     const signUp = (email, password) => {
@@ -19,36 +19,53 @@ const AuthProvider = ({ children }) => {
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
-    const signIn = (email, password) => {   
+    const signIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
-    }   
+    }
 
-    const logOut = () => { 
+    const logOut = () => {
         setLoading(true);
         return signOut(auth);
-    }   
+    }
 
-    const profileUpdate = (name,image) => {
+    const profileUpdate = (name, image) => {
         setLoading(true);
         return updateProfile(auth.currentUser, {
             displayName: name,
             photoURL: image
-        });    
-    }       
-    
+        });
+    }
+
     const googleSignIn = () => {
         setLoading(true);
         return signInWithPopup(auth, GoogleProvider);
     }
-    const facebookSignIn = () => {
+
+    // Add this to AuthProvider:
+    const phoneSignIn = (phoneNumber, recaptchaContainerId = "recaptcha-container") => {
         setLoading(true);
-        return signInWithPopup(auth, FacebookProvider);
-    }
+    
+            window.recaptchaVerifier = new RecaptchaVerifier(
+                auth,
+                recaptchaContainerId,
+                {
+                    size: "normal", // or "normal" for visible
+                    callback: (response) => {
+                        console.log("reCAPTCHA verified");
+                    },
+                },
+            );
+        
+        return signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
+    };
+
+
+
 
 
     useEffect(() => {
-       const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             console.log(currentUser);
             setLoading(false);
@@ -56,9 +73,9 @@ const AuthProvider = ({ children }) => {
         return () => {
             unSubscribe();
         };
-    }   
+    }
 
-    , []);
+        , []);
 
     const userInfo = {
         user,
@@ -68,7 +85,7 @@ const AuthProvider = ({ children }) => {
         logOut,
         profileUpdate,
         googleSignIn,
-        facebookSignIn
+        phoneSignIn,
     };
 
 

@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { FcGoogle } from 'react-icons/fc';
+import PhoneLogin from './PhoneLogin';
 
 function Login() {
     const { signIn, googleSignIn, profileUpdate } = useContext(AuthContext)
@@ -145,7 +146,6 @@ function Login() {
                                 name="email"
                                 type="email"
                                 autoComplete="email"
-                                required
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Email address"
                                 value={formData.email}
@@ -163,7 +163,6 @@ function Login() {
                                     name="password"
                                     type={showPassword ? 'text' : 'password'}
                                     autoComplete="current-password"
-                                    required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm pr-10"
                                     placeholder="Password"
                                     value={formData.password}
@@ -196,19 +195,16 @@ function Login() {
                             </button>
                         </div>
                     </div>
-                    <div  className='divider'> or sign in with </div>
+                    <div className='divider'> or sign in with </div>
                     {/* Social Logins */}
-                    <div className="grid lg:grid-cols-2 gap-2">
-                 
+                    <div className="mt-2">
                         <button onClick={handleGoogle} className="flex items-center justify-center w-full py-2 border rounded-lg hover:bg-gray-100 transition cursor-pointer">
                             <FcGoogle
                                 className="mr-2 text-2xl" />
                             Sign in with Google
                         </button>
-                        <button className="flex items-center justify-center w-full py-2 border rounded-lg hover:bg-gray-100 transition cursor-pointer lg:mt-0 mt-4">
-                            <FaFacebook className="mr-1 text-blue-500 text-2xl" />
-                            Sign in with Facebook
-                        </button>
+                        {/* phone number login */}
+                        <PhoneLogin />
                     </div>
                     <div>
                         <button
