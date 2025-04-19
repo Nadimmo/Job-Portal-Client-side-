@@ -17,6 +17,7 @@ import LatestBlogsAndNews from '../Page/Dashboard/LatestBlogsAndNews/LatestBlogs
 import SendFeedback from '../Page/Dashboard/SendFeedbac/SendFeedbac';
 import ManageJobs from '../Page/Dashboard/ManageJobs/ManageJobs';
 import ManageBlogs from '../Page/Dashboard/ManageBlogs/ManageBlogs';
+import UpdateJob from '../Page/Dashboard/ManageJobs/UpdateJob';
 
 
 const Route = createBrowserRouter([
@@ -77,6 +78,11 @@ const Route = createBrowserRouter([
             {
                 path:"manageJobs",
                 element: <ManageJobs/>
+            },
+            {
+                path:"updateJob/:id",
+                element: <UpdateJob/>,
+                loader: ({params}) => fetch(`http://localhost:5000/updateJob/${params.id}`)
             },
             {
                 path:"manageBlogs",

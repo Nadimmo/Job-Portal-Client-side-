@@ -3,6 +3,7 @@ import useAllJobs from '../../../Components/Hooks/useAllJobs';
 import { Pencil, Trash2 } from 'lucide-react';
 import useAxiosPublic from '../../../Components/Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const ManageJobs = () => {
   const { allJobs, refetch } = useAllJobs();
@@ -51,11 +52,11 @@ const ManageJobs = () => {
             <p className="text-gray-600">Location: <span className="font-medium">{job.location}</span></p>
 
             <div className="flex items-center gap-4 mt-4">
-              <button
+              <Link to={`/dashboard/updateJob/${job._id}`}
                 className="flex items-center gap-1 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg transition-colors duration-200 cursor-pointer"
               >
                 <Pencil size={16} /> Edit
-              </button>
+              </Link>
               <button onClick={() => handleRemove(job._id)}
                 className="flex items-center gap-1 px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded-lg transition-colors duration-200 cursor-pointer"
               >
