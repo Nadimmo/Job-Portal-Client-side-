@@ -3,6 +3,7 @@ import useLatestBlogs from '../../../Components/Hooks/useLatestBlogs';
 import { Pencil, Trash2 } from 'lucide-react';
 import useAxiosPublic from '../../../Components/Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const ManageBlogs = () => {
   const { blogs , refetch} = useLatestBlogs();
@@ -51,11 +52,11 @@ const ManageBlogs = () => {
             <p className="text-gray-600">Category: <span className="font-medium">{blog.category || 'Uncategorized'}</span></p>
 
             <div className="flex items-center gap-4 mt-4">
-              <button
+              <Link to={`/dashboard/updateBlog/${blog._id}`}
                 className="flex items-center gap-1 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg transition-colors duration-200 cursor-pointer"
               >
                 <Pencil size={16} /> Edit
-              </button>
+              </Link>
               <button onClick={() => handleRemove(blog._id)}
                 className="flex items-center gap-1 px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded-lg transition-colors duration-200 cursor-pointer"
               >
