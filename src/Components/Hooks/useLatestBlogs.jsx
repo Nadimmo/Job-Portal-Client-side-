@@ -5,14 +5,14 @@ import { useQuery } from '@tanstack/react-query'
 const useLatestBlogs = () => {
     const axiosPublic = useAxiosPublic()
 
-    const { data: blogs = [] } = useQuery({
+    const {refetch, data: blogs = [] } = useQuery({
         queryKey: ["blogs"],
         queryFn: async () => {
             const res = await axiosPublic.get("/latestBlogs")
             return res.data;
         }
     })
-    return {blogs}
+    return {blogs, refetch}
 }
 
 export default useLatestBlogs

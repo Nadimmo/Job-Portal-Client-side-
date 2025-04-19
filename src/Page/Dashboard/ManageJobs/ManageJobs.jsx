@@ -5,36 +5,35 @@ import useAxiosPublic from '../../../Components/Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 
 const ManageJobs = () => {
-  const {allJobs, refetch} = useAllJobs();
+  const { allJobs, refetch } = useAllJobs();
   const axiosPublic = useAxiosPublic()
 
   const handleRemove = (id) => {
 
     Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
     }).then((result) => {
-        if (result.isConfirmed) {
-            axiosPublic.delete(`/allJobs/${id}`)
-                .then((res) => {
-                    if (res.data.deletedCount) {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                        });
-                        refetch()
-                    }
-                })
-
-        }
+      if (result.isConfirmed) {
+        axiosPublic.delete(`/allJobs/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your job has been deleted.",
+                icon: "success"
+              });
+              refetch()
+            }
+          })
+      }
     });
-}
+  }
 
 
   return (
@@ -57,7 +56,7 @@ const ManageJobs = () => {
               >
                 <Pencil size={16} /> Edit
               </button>
-              <button onClick={()=>handleRemove(job._id)}
+              <button onClick={() => handleRemove(job._id)}
                 className="flex items-center gap-1 px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm rounded-lg transition-colors duration-200 cursor-pointer"
               >
                 <Trash2 size={16} /> Delete
