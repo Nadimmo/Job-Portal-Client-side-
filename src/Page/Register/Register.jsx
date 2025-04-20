@@ -152,11 +152,34 @@ function Register() {
             .then((result) => {
                 const name = result.user.displayName;
                 const photoURL = result.user.photoURL;
+                const email = result.user.email;
+                const userInfo = {
+                    name, email
+                }
 
                 profileUpdate(name, photoURL)
                     .then(res => {
-                        setSuccessMessage('Google sign-in successful!');
-                        navigate('/')
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    // Show success message
+                                    Swal.fire({
+                                        title: "Registration Successful",
+                                        text: "You have successfully registered!",
+                                        icon: "success",
+                                        confirmButtonText: "OK",
+                                    })
+                                    navigate('/')
+                                } else {
+                                    Swal.fire({
+                                        title: "Registration Successful",
+                                        text: "You have successfully registered!",
+                                        icon: "success",
+                                        confirmButtonText: "OK",
+                                    })
+                                    navigate('/')
+                                }
+                            })
                     })
 
             })

@@ -5,10 +5,12 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { FcGoogle } from 'react-icons/fc';
 import PhoneLogin from './PhoneLogin';
+import useAxiosPublic from '../../Components/Hooks/useAxiosPublic';
 
 function Login() {
     const { signIn, googleSignIn, profileUpdate } = useContext(AuthContext)
     const navigate = useNavigate()
+    const axiosPublic = useAxiosPublic()
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -91,17 +93,34 @@ function Login() {
             .then((result) => {
                 const name = result.user.displayName;
                 const image = result.user.photoURL;
+                const email = result.user.email;
+                const userInfo = {
+                    name, email
+                }
 
                 profileUpdate(name, image)
                     .then(res => {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Login successful!',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        navigate("/")
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    // Show success message
+                                    Swal.fire({
+                                        title: "Registration Successful",
+                                        text: "You have successfully registered!",
+                                        icon: "success",
+                                        confirmButtonText: "OK",
+                                    })
+                                    navigate('/')
+                                } else {
+                                    Swal.fire({
+                                        title: "Registration Successful",
+                                        text: "You have successfully registered!",
+                                        icon: "success",
+                                        confirmButtonText: "OK",
+                                    })
+                                    navigate('/')
+                                }
+                            })
 
                     })
             })
