@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { FaEye, FaEyeSlash, FaFacebook } from 'react-icons/fa'; // Import eye icons from react-icons
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { FcGoogle } from 'react-icons/fc';
@@ -10,6 +10,7 @@ import useAxiosPublic from '../../Components/Hooks/useAxiosPublic';
 function Login() {
     const { signIn, googleSignIn, profileUpdate } = useContext(AuthContext)
     const navigate = useNavigate()
+    const location = useLocation()
     const axiosPublic = useAxiosPublic()
     const [formData, setFormData] = useState({
         email: '',
@@ -67,7 +68,7 @@ function Login() {
                         });
                         setFormData({ email: '', password: '' });
                         setErrors({});
-                        navigate("/")
+                        navigate(location.state || "/")
                     }
                 })
                 .catch((error) => {
@@ -110,7 +111,7 @@ function Login() {
                                         icon: "success",
                                         confirmButtonText: "OK",
                                     })
-                                    navigate('/')
+                                    navigate(location.state || "/")
                                 } else {
                                     Swal.fire({
                                         title: "Registration Successful",
@@ -118,7 +119,7 @@ function Login() {
                                         icon: "success",
                                         confirmButtonText: "OK",
                                     })
-                                    navigate('/')
+                                    navigate(location.state || "/")
                                 }
                             })
 

@@ -20,6 +20,7 @@ import ManageBlogs from '../Page/Dashboard/ManageBlogs/ManageBlogs';
 import UpdateJob from '../Page/Dashboard/ManageJobs/UpdateJob';
 import UpdateBlog from '../Page/Dashboard/ManageBlogs/UpdateBlog';
 import ManageUsers from '../Page/Dashboard/ManageUsers/ManageUsers';
+import PrivateRoute from '../Page/PrivateRoute/PrivateRoute';
 
 
 const Route = createBrowserRouter([
@@ -59,7 +60,7 @@ const Route = createBrowserRouter([
         children: [
             {
                 path:"appliedJobs",
-                element: <AppliedJobs/>
+                element: <PrivateRoute><AppliedJobs/></PrivateRoute>
             },
             {
                 path:"feedback",

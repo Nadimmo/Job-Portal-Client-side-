@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { FcGoogle } from 'react-icons/fc';
@@ -9,6 +9,7 @@ import useAxiosPublic from '../../Components/Hooks/useAxiosPublic';
 function Register() {
     const { signUp, profileUpdate, googleSignIn, facebookSignIn } = useContext(AuthContext);
     const navigate = useNavigate()
+    const location = useLocation()
     const axiosPublic = useAxiosPublic()
     // Assuming you have a useAuth hook to access the AuthContext]
 
@@ -106,7 +107,7 @@ function Register() {
                                                 userType: 'jobseeker',
                                             });
                                             setErrors({});
-                                            navigate('/')
+                                            navigate(location.state || "/")
                                         } else {
                                             Swal.fire({
                                                 title: "Registration Successful",
@@ -123,7 +124,7 @@ function Register() {
                                                 userType: 'jobseeker',
                                             });
                                             setErrors({});
-                                            navigate('/')
+                                            navigate(location.state || "/")
                                         }
                                     })
 
@@ -169,7 +170,7 @@ function Register() {
                                         icon: "success",
                                         confirmButtonText: "OK",
                                     })
-                                    navigate('/')
+                                    navigate(location.state || "/")
                                 } else {
                                     Swal.fire({
                                         title: "Registration Successful",
@@ -177,7 +178,7 @@ function Register() {
                                         icon: "success",
                                         confirmButtonText: "OK",
                                     })
-                                    navigate('/')
+                                    navigate(location.state || "/")
                                 }
                             })
                     })
