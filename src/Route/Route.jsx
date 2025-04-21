@@ -21,6 +21,7 @@ import UpdateJob from '../Page/Dashboard/ManageJobs/UpdateJob';
 import UpdateBlog from '../Page/Dashboard/ManageBlogs/UpdateBlog';
 import ManageUsers from '../Page/Dashboard/ManageUsers/ManageUsers';
 import PrivateRoute from '../Page/PrivateRoute/PrivateRoute';
+import AllAppliedJobs from '../Page/Dashboard/AllAppliedJobs/AllAppliedJobs';
 
 
 const Route = createBrowserRouter([
@@ -99,6 +100,10 @@ const Route = createBrowserRouter([
             {
                 path:"manageUsers",
                 element: <ManageUsers/>
+            },
+            {
+                path:"allAppliedJobs",
+                element: <AllAppliedJobs/>
             }
         ]
     }
