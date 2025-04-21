@@ -43,6 +43,8 @@ const AllJobs = () => {
         const experience = form.experience.value;
         const skills = form.skills.value;
         const address = form.address.value;
+        const date = form.date.value;
+        const title = form.title.value || form.title.defaultValue; // use defaultValue if title is not in the form
         const email = form.email.value;
         const portfolio = form.portfolio.value;
         const linkedin = form.linkedin.value;
@@ -69,6 +71,8 @@ const AllJobs = () => {
             name,
             email,
             address,
+            date,
+            title,
             education,
             experience,
             portfolio,
@@ -163,6 +167,8 @@ const AllJobs = () => {
                                             <input name='name' type="text" placeholder="First Name" className="input input-bordered w-full" required />
                                             <input name = "email" type="email" placeholder="Email" className="input input-bordered w-full" required />
                                             <input name='address' type="text" placeholder="Address" className="input input-bordered w-full" />
+                                            <input name='date' type="datetime-local" placeholder="Date" className="input input-bordered w-full" />
+                                            <input name='title' type="text" placeholder="Job Title" className="input input-bordered w-full" defaultValue={job.title}/>
                                             <input name='skills' type="text" placeholder="Skills" className="input input-bordered w-full" />
                                             <input name='education' type="text" placeholder="Education" className="input input-bordered w-full" />
                                             <input name='experience' type="text" placeholder="Experience" className="input input-bordered w-full" />
