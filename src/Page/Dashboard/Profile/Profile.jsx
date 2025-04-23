@@ -1,10 +1,42 @@
 import React, { useContext } from 'react';
 import useSaveJobs from '../../../Components/Hooks/useSaveJobs';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
+import useAxiosPublic from '../../../Components/Hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
 
 const Profile = () => {
-  const { savedJobs, deleteJob } = useSaveJobs(); // assume deleteJob is a function in your custom hook
+  const { savedJobs, refetch } = useSaveJobs(); // assume deleteJob is a function in your custom hook
   const { user } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
+
+  
+    const handleDelete = (id) => {
+  
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axiosPublic.delete(`/savedJobs/${id}`)
+            .then((res) => {
+              if (res.data.deletedCount) {
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your job has been deleted.",
+                  icon: "success"
+                });
+                refetch()
+              }
+            })
+        }
+      });
+    }
+
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -34,7 +66,7 @@ const Profile = () => {
               <p className="text-gray-600">Email: {job.email}</p>
             </div>
             <button
-              onClick={() => deleteJob(job._id)}
+              onClick={() => handleDelete(job._id)}
               className=" bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded lg:mt-20 md:mt-0 mt-4 cursor-pointer"
             >
               Delete
