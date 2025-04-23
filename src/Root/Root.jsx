@@ -5,8 +5,7 @@ import Footer from '../Components/Footer/Footer'
 
 const Root = () => {
   const location = useLocation()
-  console.log(location.pathname)
-  const noHeaderFooter = location.pathname.includes("showDetails")
+  const noHeaderFooter = location.pathname.includes("showDetails") || location.pathname.includes("showJobDetails")
   return (
     <div>
        {noHeaderFooter || <Header></Header>}

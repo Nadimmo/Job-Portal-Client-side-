@@ -24,6 +24,7 @@ import PrivateRoute from '../Page/PrivateRoute/PrivateRoute';
 import AllAppliedJobs from '../Page/Dashboard/AllAppliedJobs/AllAppliedJobs';
 import Profile from '../Page/Dashboard/Profile/Profile';
 import ShowDetails from '../Page/AllCompanies/ShowDetails';
+import ShowJobDetails from '../Page/AllJobs/ShowJobDetils';
 
 
 const Route = createBrowserRouter([
@@ -50,6 +51,11 @@ const Route = createBrowserRouter([
             {
                 path:'/allJobs',
                 element: <AllJobs/>
+            },
+            {
+                path:'/showJobDetails/:id',
+                element: <ShowJobDetails/>,
+                loader: ({params}) => fetch(`http://localhost:5000/showJobDetails/${params.id}`)
             },
             {
                 path:'/allCompanies',

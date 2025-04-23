@@ -1,19 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import useAllJobs from '../../Components/Hooks/useAllJobs';
-import useAxiosPublic from '../../Components/Hooks/useAxiosPublic';
-import Swal from 'sweetalert2';
-import axios from 'axios';
-import { AuthContext } from '../../AuthProvider/AuthProvider';
-import { useNavigate } from 'react-router-dom';
+
+import { Link } from 'react-router-dom';
 
 const AllJobs = () => {
-    const { user } = useContext(AuthContext)
-    const axiosPublic = useAxiosPublic()
-    const navigate = useNavigate()
-    // const  CLOUDINARY_URL='cloudinary://456383677727458:LBWQ3vOV51tSbjZkIVCVOlPjdhs@dbjqzpbze'
-    const CLOUDINARY_UPLOAD_PRESET = "job portal";
-    const CLOUDINARY_NAME = "dbjqzpbze";
-
 
     const { allJobs } = useAllJobs()
     const [searchLocation, setSearchLocation] = useState('');
@@ -37,92 +27,6 @@ const AllJobs = () => {
         if (pageNumber < 1 || pageNumber > totalPages) return;
         setCurrentPage(pageNumber);
     }
-
-    const handleShowModal = (index) => {
-        if (!user) {
-            Swal.fire({
-                icon: 'error',
-                title: 'You must be logged in to apply any job',
-                showConfirmButton: false,
-                timer: 1500
-            })
-            return navigate("/login")
-        }else{
-            return document.getElementById(`apply_modal_${index}`).showModal()
-        }
-
-        
-    }
-
-
-    const handleApply = async (e) => {
-        e.preventDefault();
-
-        const form = e.target;
-        const name = form.name.value;
-        const education = form.education.value;
-        const experience = form.experience.value;
-        const skills = form.skills.value;
-        const address = form.address.value;
-        const date = form.date.value;
-        const title = form.title.value || form.title.defaultValue; // use defaultValue if title is not in the form
-        const email = form.email.value;
-        const portfolio = form.portfolio.value;
-        const linkedin = form.linkedin.value;
-        const gitHub = form.gitHub.value;
-        const resumeFile = form.resume.files[0]; // rename for clarity
-
-        // Prepare FormData for Cloudinary
-        const formData = new FormData();
-        formData.append("file", resumeFile); //  use "file" instead of "image"
-        formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
-        formData.append("cloud_name", CLOUDINARY_NAME);
-
-        try {
-            // Upload resume to Cloudinary (raw endpoint for PDFs)
-            const res = await axios.post(
-                `https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/raw/upload`,
-                formData
-            );
-
-            const resumeUrl = res.data.secure_url;
-
-            // Now create the final job application object
-            const applyInfo = {
-                name,
-                email,
-                address,
-                date,
-                title,
-                education,
-                experience,
-                portfolio,
-                linkedin,
-                gitHub,
-                resume: resumeUrl, //  use URL, not file object
-                skills,
-            };
-
-            // Post application data to your database
-            const response = await axiosPublic.post("/appliedJobs", applyInfo);
-
-            if (response.data) {
-                Swal.fire({
-                    icon: "success",
-                    title: "Applied successfully!",
-                });
-                form.reset(); // reset form if needed
-            }
-        } catch (error) {
-            console.error("Error applying:", error.message);
-            Swal.fire({
-                icon: "error",
-                title: "Failed to apply!",
-                text: error.message,
-            });
-        }
-    };
-
 
 
 
@@ -157,7 +61,7 @@ const AllJobs = () => {
             {/* Job Listings */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-10">
                 {currentPosts.length > 0 ? currentPosts.map((job, index) => (
-                    <div key={index} className="bg-white shadow-lg rounded-lg p-6 border border-gray-200 relative">
+                    <div key={index} className="bg-white shadow-lg rounded-lg p-6 border border-gray-200 relative cursor-pointer">
                         <span className={`absolute top-2 left-2 px-3 py-1 text-sm font-bold rounded ${job.type === "Full Time" ? "bg-green-100 text-green-700" :
                             job.type === "Part Time" ? "bg-yellow-100 text-yellow-700" : "bg-pink-100 text-pink-700"
                             }`}>
@@ -169,52 +73,11 @@ const AllJobs = () => {
                             <p className="text-gray-500 text-sm">{job.location}</p>
                             {/* You can open the modal using document.getElementById('ID').showModal() method */}
                             {/* Apply Button */}
-                            <button onClick={()=>handleShowModal(index)}
+                            <Link to={`/showJobDetails/${job._id}`} 
                                 className="mt-4 px-4 py-2 border border-green-500 text-green-500 rounded hover:cursor-pointer hover:text-black hover:bg-green-500  transition"
                             >
-                                Apply Now
-                            </button>
-
-                            {/* Modal */}
-                            <dialog id={`apply_modal_${index}`} className="modal">
-                                <div className="modal-box w-full max-w-2xl">
-                                    <form method="dialog">
-                                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                                    </form>
-                                    <h3 className="font-bold text-xl mb-4 text-center">Apply for {job.title}</h3>
-
-                                    <form onSubmit={handleApply} className="space-y-4">
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <input name='name' type="text" placeholder="First Name" className="input input-bordered w-full" required />
-                                            <input name="email" type="email" placeholder="Email" className="input input-bordered w-full" required />
-                                            <input name='address' type="text" placeholder="Address" className="input input-bordered w-full" />
-                                            <input name='date' type="datetime-local" placeholder="Date" className="input input-bordered w-full" />
-                                            <input name='title' type="text" placeholder="Job Title" className="input input-bordered w-full" defaultValue={job.title} />
-                                            <input name='skills' type="text" placeholder="Skills" className="input input-bordered w-full" />
-                                            <input name='education' type="text" placeholder="Education" className="input input-bordered w-full" />
-                                            <input name='experience' type="text" placeholder="Experience" className="input input-bordered w-full" />
-                                            <input name='portfolio' type="url" placeholder="Portfolio URL" className="input input-bordered w-full" />
-                                            <input name='gitHub' type="url" placeholder="GitHub URL" className="input input-bordered w-full" />
-                                            <input name='linkedin' type="url" placeholder="LinkedIn URL" className="input input-bordered w-full" />
-                                        </div>
-
-                                        <div>
-                                            <label className="block text-sm font-medium text-gray-700 mb-1">Upload Resume</label>
-                                            <input name='resume' type="file" className="file-input file-input-bordered w-full" required />
-                                        </div>
-
-                                        <div className="text-center">
-                                            <button
-                                                type="submit"
-                                                className="bg-green-500 text-black px-6 py-2 rounded hover:bg-green-600 hover:cursor-pointer"
-                                            >
-                                                Submit Application
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </dialog>
-
+                                Show Details
+                            </Link>
                         </div>
                     </div>
                 )) : (
