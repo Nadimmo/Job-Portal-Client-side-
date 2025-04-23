@@ -13,6 +13,7 @@ import {
 } from 'react-icons/fa';
 import { SiCircleci, SiLenovo, SiNvidia } from 'react-icons/si';
 import useAllCompany from '../../Components/Hooks/useAllCompany';
+import { Link } from 'react-router-dom';
 
 
 const AllCompanies = () => {
@@ -52,7 +53,7 @@ const AllCompanies = () => {
       <h1 className="text-4xl font-bold text-center mb-10">Discover our latest digital marketing companies</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-10">
         {currentPosts.map((company, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-md p-6 text-center">
+          <Link to={`/showDetails/${company._id}`} key={index} className="bg-white rounded-lg shadow-md p-6 text-center">
             <img src={company.icon} alt="" className="w-20 h-20 rounded-[50%] mx-auto" />
             <h3 className="text-lg font-semibold mb-2">{company.name}</h3>
             <p className="text-sm text-gray-600 mb-4">{company.title || "Digital Marketing Solutions for Tomorrow"}</p>
@@ -61,7 +62,7 @@ const AllCompanies = () => {
               <span className="text-gray-500 flex "> <FaLocationArrow className='mx-2 my-1' /> {company.location}</span>
               <span className="text-blue-500">{company.jobs} Jobs</span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       {/* Pagination Controls */}

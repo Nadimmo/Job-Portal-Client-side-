@@ -1,14 +1,17 @@
 import React from 'react'
 import Header from '../Components/Header/Header'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import Footer from '../Components/Footer/Footer'
 
 const Root = () => {
+  const location = useLocation()
+  console.log(location.pathname)
+  const noHeaderFooter = location.pathname.includes("showDetails")
   return (
     <div>
-        <Header></Header>
+       {noHeaderFooter || <Header></Header>}
         <Outlet/>
-        <Footer/>
+        {noHeaderFooter || <Footer/>}
     </div>
   )
 }

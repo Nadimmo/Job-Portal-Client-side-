@@ -23,6 +23,7 @@ import ManageUsers from '../Page/Dashboard/ManageUsers/ManageUsers';
 import PrivateRoute from '../Page/PrivateRoute/PrivateRoute';
 import AllAppliedJobs from '../Page/Dashboard/AllAppliedJobs/AllAppliedJobs';
 import Profile from '../Page/Dashboard/Profile/Profile';
+import ShowDetails from '../Page/AllCompanies/ShowDetails';
 
 
 const Route = createBrowserRouter([
@@ -53,6 +54,11 @@ const Route = createBrowserRouter([
             {
                 path:'/allCompanies',
                 element: <AllCompanies/>
+            },
+            {
+                path:'/showDetails/:id',
+                element: <ShowDetails/>,
+                loader: ({params}) => fetch(`http://localhost:5000/showDetails/${params.id}`)
             }
         ]
     },
