@@ -22,6 +22,7 @@ import UpdateBlog from '../Page/Dashboard/ManageBlogs/UpdateBlog';
 import ManageUsers from '../Page/Dashboard/ManageUsers/ManageUsers';
 import PrivateRoute from '../Page/PrivateRoute/PrivateRoute';
 import AllAppliedJobs from '../Page/Dashboard/AllAppliedJobs/AllAppliedJobs';
+import Profile from '../Page/Dashboard/Profile/Profile';
 
 
 const Route = createBrowserRouter([
@@ -104,6 +105,10 @@ const Route = createBrowserRouter([
             {
                 path:"allAppliedJobs",
                 element: <AllAppliedJobs/>
+            },
+            {
+                path:"profile",
+                element: <Profile/>
             }
         ]
     }
