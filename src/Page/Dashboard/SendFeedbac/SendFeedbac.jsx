@@ -14,15 +14,15 @@ const SendFeedback = () => {
     const feedback = form.feedback.value;
     const image = form.image.files[0];
   
-    const formData = new FormData();
+    const formData = new FormData()
     formData.append("image", image);
   
     try {
-      const res = await axios.post(`https://api.imgbb.com/1/upload?key=425000ec487abe2b84d0bb7de5769c3a`, formData);
+      const res = await axios.post("https://api.imgbb.com/1/upload?key=1b65a8a855445b1b3daf858e85fd4479", formData)
       const imageURL = res.data.data.url;
   
-      const info = { name, role, feedback, image: imageURL };
-      const response = await axiosPublic.post("/review", info);
+      const info = { name, role, feedback, image: imageURL }
+      const response = await axiosPublic.post("/review", info)
   
       if (response.data.insertedId) {
         Swal.fire({
