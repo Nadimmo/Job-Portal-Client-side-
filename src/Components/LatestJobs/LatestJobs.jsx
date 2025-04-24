@@ -4,104 +4,15 @@ import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
-import axios from "axios";
 import { FaBookmark } from "react-icons/fa";
 
 
 
-const JobCard = ({ title, location, type, index }) => {
+const JobCard = ({ title, location, type, index, _id }) => {
   const { user } = useContext(AuthContext)
   const navigate = useNavigate()
   const axiosPublic = useAxiosPublic()
-  const CLOUDINARY_UPLOAD_PRESET = "job portal";
-  const CLOUDINARY_NAME = "dbjqzpbze";
 
-
-
-  const handleShowModal = (index) => {
-    if (!user) {
-      Swal.fire({
-        icon: 'error',
-        title: 'You must be logged in to apply any job',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      return navigate("/login")
-    } else {
-      return document.getElementById(`apply_modal_${index}`).showModal()
-    }
-
-
-  }
-
-
-  const handleApply = async (e) => {
-    e.preventDefault();
-
-    const form = e.target;
-    const name = form.name.value;
-    const education = form.education.value;
-    const experience = form.experience.value;
-    const skills = form.skills.value;
-    const address = form.address.value;
-    const date = form.date.value;
-    const title = form.title.value || form.title.defaultValue; // use defaultValue if title is not in the form
-    const email = form.email.value;
-    const portfolio = form.portfolio.value;
-    const linkedin = form.linkedin.value;
-    const gitHub = form.gitHub.value;
-    const resumeFile = form.resume.files[0]; // rename for clarity
-
-    // Prepare FormData for Cloudinary
-    const formData = new FormData();
-    formData.append("file", resumeFile); //  use "file" instead of "image"
-    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
-    formData.append("cloud_name", CLOUDINARY_NAME);
-
-    try {
-      // Upload resume to Cloudinary (raw endpoint for PDFs)
-      const res = await axios.post(
-        `https://api.cloudinary.com/v1_1/${CLOUDINARY_NAME}/raw/upload`,
-        formData
-      );
-
-      const resumeUrl = res.data.secure_url;
-
-      // Now create the final job application object
-      const applyInfo = {
-        name,
-        email,
-        address,
-        date,
-        title,
-        education,
-        experience,
-        portfolio,
-        linkedin,
-        gitHub,
-        resume: resumeUrl, //  use URL, not file object
-        skills,
-      };
-
-      // Post application data to your database
-      const response = await axiosPublic.post("/appliedJobs", applyInfo);
-
-      if (response.data) {
-        Swal.fire({
-          icon: "success",
-          title: "Applied successfully!",
-        });
-        form.reset(); // reset form if needed
-      }
-    } catch (error) {
-      console.error("Error applying:", error.message);
-      Swal.fire({
-        icon: "error",
-        title: "Failed to apply!",
-        text: error.message,
-      });
-    }
-  };
 
 
   const handleSave = async () => {
@@ -155,14 +66,14 @@ const JobCard = ({ title, location, type, index }) => {
           <p className="text-gray-500 text-sm">{location}</p>
           {/* You can open the modal using document.getElementById('ID').showModal() method */}
           {/* Apply Button */}
-          <button onClick={() => handleShowModal(index)}
+          <Link to={`/showJobDetails/${_id}`}
             className="mt-4 px-4 py-2 border border-green-500 text-green-500 rounded hover:cursor-pointer hover:text-black hover:bg-green-500  transition"
           >
-            Apply Now
-          </button>
+            Show Details
+          </Link>
 
           {/* Modal */}
-          <dialog id={`apply_modal_${index}`} className="modal">
+          {/* <dialog id={`apply_modal_${index}`} className="modal">
             <div className="modal-box w-full max-w-2xl">
               <form method="dialog">
                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
@@ -199,7 +110,7 @@ const JobCard = ({ title, location, type, index }) => {
                 </div>
               </form>
             </div>
-          </dialog>
+          </dialog> */}
 
         </div>
       </div>
