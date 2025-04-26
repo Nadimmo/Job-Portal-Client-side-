@@ -22,7 +22,7 @@ const Profile = () => {
         confirmButtonText: "Yes, delete it!"
       }).then((result) => {
         if (result.isConfirmed) {
-          axiosSecure.delete(`/savedJobs/${id}`)
+          axiosSecure.delete(`/saveJobs/${id}`)
             .then((res) => {
               if (res.data.deletedCount) {
                 Swal.fire({

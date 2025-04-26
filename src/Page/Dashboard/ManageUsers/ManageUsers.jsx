@@ -1,11 +1,11 @@
 import React from 'react'
 import useUsers from '../../../Components/Hooks/useUsers'
-import useAxiosPublic from '../../../Components/Hooks/useAxiosPublic'
 import Swal from 'sweetalert2'
+import useAxiosSecure from '../../../Components/Hooks/useAxiosSecure'
 
 const ManageUsers = () => {
   const {users, refetch} = useUsers() 
-  const axiosPublic = useAxiosPublic()
+  const axiosSecure = useAxiosSecure()
 
   const handleMakeAdmin = (id) => {
     // You can integrate your backend API here
@@ -24,7 +24,7 @@ const ManageUsers = () => {
         confirmButtonText: "Yes, delete it!"
       }).then((result) => {
         if (result.isConfirmed) {
-          axiosPublic.delete(`/users/${id}`)
+          axiosSecure.delete(`/users/${id}`)
             .then((res) => {
               if (res.data.deletedCount) {
                 Swal.fire({

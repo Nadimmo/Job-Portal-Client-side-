@@ -10,7 +10,7 @@ const useAppliedJob = () => {
     const { refetch, data: appliedJobs = [] } = useQuery({
         queryKey: ["appliedJobs", user?.email],
         queryFn: async () => {
-            const res = await axiosPublic.get(`/appliedJobs?email=${user?.email}`)
+            const res = await axiosSecure.get(`/appliedJobs?email=${user?.email}`)
             return res.data
         },
     })

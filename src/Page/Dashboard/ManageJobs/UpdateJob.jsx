@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import axios from "axios";
 import { responsivePropType } from "@mui/system";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
 
 const UpdateJob = () => {
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const job = useLoaderData()
     const navigate = useNavigate()
 
@@ -64,7 +64,7 @@ const UpdateJob = () => {
                 shortDescription,
             };
 
-            const res = await axiosPublic.put(`/updateJob/${job._id}`, jobData); // Change "/jobs" to your actual backend route
+            const res = await axiosSecure.put(`/updateJob/${job._id}`, jobData); // Change "/jobs" to your actual backend route
             // console.log(res.data)
             if (res.data.modifiedCount) {
                 Swal.fire({
