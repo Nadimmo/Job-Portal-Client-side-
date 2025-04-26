@@ -81,6 +81,10 @@ const Route = createBrowserRouter([
                 element: <SendFeedback/>
             },
             {
+                path:"profile",
+                element: <Profile/>
+            },
+            {
                 path:"newJob",
                 element: <AddNewJob/>
             },
@@ -118,10 +122,7 @@ const Route = createBrowserRouter([
                 path:"allAppliedJobs",
                 element: <AllAppliedJobs/>
             },
-            {
-                path:"profile",
-                element: <Profile/>
-            }
+           
         ]
     }
 ]);
