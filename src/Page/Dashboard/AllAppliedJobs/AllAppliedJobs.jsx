@@ -2,12 +2,12 @@ import React from 'react';
 import { Pencil, Trash2, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import useAllAppliedJobs from '../../../Components/Hooks/useAllAppliedJobs';
-import useAxiosPublic from '../../../Components/Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../Components/Hooks/useAxiosSecure';
 
 const AllAppliedJobs = () => {
   const { appliedAllJobs, refetch } = useAllAppliedJobs();
-  const axiosPublic = useAxiosPublic()
+  const axiosSecure = useAxiosSecure()
 
   const handleRemove = (id) => {
   
@@ -21,7 +21,7 @@ const AllAppliedJobs = () => {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPublic.delete(`/appliedAllJobs/${id}`)
+        axiosSecure.delete(`/appliedAllJobs/${id}`)
           .then((res) => {
             if (res.data.deletedCount) {
               Swal.fire({

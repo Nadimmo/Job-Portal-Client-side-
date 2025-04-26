@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import useAxiosPublic from "../../../Components/Hooks/useAxiosPublic";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
 
 const UpdateBlog = () => {
     const blog = useLoaderData()
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
@@ -43,7 +43,7 @@ const UpdateBlog = () => {
                 image: imageURL,
                 category
             }
-            const res = await axiosPublic.put(`/updateBlog/${blog._id}`, info)
+            const res = await axiosSecure.put(`/updateBlog/${blog._id}`, info)
             if (res.data.modifiedCount) {
                 Swal.fire({
                     title: 'Job Updated Successfully!',

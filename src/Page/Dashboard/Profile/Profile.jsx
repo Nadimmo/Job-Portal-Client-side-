@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import useSaveJobs from '../../../Components/Hooks/useSaveJobs';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
-import useAxiosPublic from '../../../Components/Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../Components/Hooks/useAxiosSecure';
 
 const Profile = () => {
   const { savedJobs, refetch } = useSaveJobs(); // assume deleteJob is a function in your custom hook
   const { user } = useContext(AuthContext);
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   
     const handleDelete = (id) => {
@@ -22,7 +22,7 @@ const Profile = () => {
         confirmButtonText: "Yes, delete it!"
       }).then((result) => {
         if (result.isConfirmed) {
-          axiosPublic.delete(`/savedJobs/${id}`)
+          axiosSecure.delete(`/savedJobs/${id}`)
             .then((res) => {
               if (res.data.deletedCount) {
                 Swal.fire({
