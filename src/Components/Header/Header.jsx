@@ -27,6 +27,7 @@ const Header = () => {
             <li><NavLink to={'/allJobs'} className="nav-link">All Jobs</NavLink></li>
             <li><NavLink to={'/allCompanies'} className="nav-link">All Companies</NavLink></li>
             <li><NavLink to={'/dashboard/appliedJobs'} className="nav-link">Dashboard</NavLink></li>
+            <li><NavLink to={'/contact'} className="nav-link">Contact</NavLink></li>
         </>
     );
 
