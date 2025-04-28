@@ -4,41 +4,53 @@ import Swal from 'sweetalert2'
 import useAxiosSecure from '../../../Components/Hooks/useAxiosSecure'
 
 const ManageUsers = () => {
-  const {users, refetch} = useUsers() 
+  const { users, refetch } = useUsers()
   const axiosSecure = useAxiosSecure()
 
-  const handleMakeAdmin = (id) => {
-    // You can integrate your backend API here
-    console.log('Make Admin for:', id);
-  };
-
   const handleDelete = (id) => {
-  
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          axiosSecure.delete(`/users/${id}`)
-            .then((res) => {
-              if (res.data.deletedCount) {
-                Swal.fire({
-                  title: "Deleted!",
-                  text: "Your user has been deleted.",
-                  icon: "success"
-                });
-                refetch()
-              }
-            })
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your user has been deleted.",
+                icon: "success"
+              });
+              refetch()
+            }
+          })
+      }
+    });
+  }
+
+
+  const handleMakeAdmin = (id) => {
+    axiosSecure.patch(`/users/makeAdmin/${id}`)
+      .then(res => {
+        if (res.data.modifiedCount) {
+          Swal.fire({
+            title: "Make Admin",
+            text: "Your user has been make admin.",
+            icon: "success"
+          });
         }
-      });
-    }
-  
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+  }
+
 
   return (
     <div className="p-6">
