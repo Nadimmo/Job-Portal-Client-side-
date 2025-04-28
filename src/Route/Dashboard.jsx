@@ -26,6 +26,7 @@ const Dashboard = () => {
                         <li><NavLink to='/dashboard/manageBlogs' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#EFDCAB] text-gray-900 hover:text-black transition duration-300'><FaNewspaper
                         /> Manage Blogs</NavLink></li>
                         <li><NavLink to='/dashboard/manageUsers' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#EFDCAB] text-gray-900 hover:text-black transition duration-300'><FaUsers /> Manage Users</NavLink></li>
+                        <li><NavLink to='/dashboard/usersMessage' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#EFDCAB] text-gray-900 hover:text-black transition duration-300'><FaUsers />Users Message</NavLink></li>
                         <li><NavLink to='/dashboard/allAppliedJobs' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#EFDCAB] text-gray-900 hover:text-black transition duration-300'><FaPen />All Applied Jobs</NavLink></li>
                         <li><NavLink to='/' className='flex items-center gap-2 p-2 rounded-lg hover:bg-[#EFDCAB] text-gray-900 hover:text-black transition duration-300'><FaHome /> Home</NavLink></li>
                         <div className='divider'></div>

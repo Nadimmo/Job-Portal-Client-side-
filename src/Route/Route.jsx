@@ -26,6 +26,7 @@ import Profile from '../Page/Dashboard/Profile/Profile';
 import ShowDetails from '../Page/AllCompanies/ShowDetails';
 import ShowJobDetails from '../Page/AllJobs/ShowJobDetils';
 import Contact from '../Page/Contact/Contact';
+import UsersMessage from '../Page/Dashboard/UsersMessage/UsersMessage';
 
 
 const Route = createBrowserRouter([
@@ -126,6 +127,10 @@ const Route = createBrowserRouter([
             {
                 path:"allAppliedJobs",
                 element: <AllAppliedJobs/>
+            },
+            {
+                path:"usersMessage",
+                element: <UsersMessage/>
             },
            
         ]
