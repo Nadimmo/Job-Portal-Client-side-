@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import './Header.css'; // Import the CSS file for styles
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import useAdmin from '../Hooks/useAdmin';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext)
     const navigate = useNavigate()
+    const [isAdmin] = useAdmin()
     // console.log(user.metadata.createdAt);
 
 
@@ -26,7 +28,12 @@ const Header = () => {
             <li><NavLink to={'/about'} className="nav-link">About</NavLink></li>
             <li><NavLink to={'/allJobs'} className="nav-link">All Jobs</NavLink></li>
             <li><NavLink to={'/allCompanies'} className="nav-link">All Companies</NavLink></li>
-            <li><NavLink to={'/dashboard/appliedJobs'} className="nav-link">Dashboard</NavLink></li>
+            {
+            user && isAdmin &&<li><NavLink to={'/dashboard/newCompany'} className="nav-link">Dashboard</NavLink></li>
+            }
+            {
+            user && !isAdmin &&<li><NavLink to={'/dashboard/appliedJobs'} className="nav-link">Dashboard</NavLink></li>
+            }
             <li><NavLink to={'/contact'} className="nav-link">Contact</NavLink></li>
         </>
     );
@@ -56,7 +63,7 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                {user ? <> <span className=' font-semibold lg:mr-2 uppercase    '>{user?.displayName  || "Anonymous"}</span> <button onClick={handleSignOut} className="font-semibold text-lg   transition duration-200 hover:text-blue-500 cursor-pointer bg-gray-800  border-none outline-none">Sign Out</button></> : <><Link to={'/login'} className="font-semibold text-lg hover:text-gray-300 transition duration-200">Login</Link></>}
+                {user ? <> <span className=' font-semibold lg:mr-2 uppercase    '>{user?.displayName || "Anonymous"}</span> <button onClick={handleSignOut} className="font-semibold text-lg   transition duration-200 hover:text-blue-500 cursor-pointer bg-gray-800  border-none outline-none">Sign Out</button></> : <><Link to={'/login'} className="font-semibold text-lg hover:text-gray-300 transition duration-200">Login</Link></>}
             </div>
         </div>
     );

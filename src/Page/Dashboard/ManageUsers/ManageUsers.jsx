@@ -44,6 +44,7 @@ const ManageUsers = () => {
             text: "Your user has been make admin.",
             icon: "success"
           });
+          refetch()
         }
       })
       .catch(err => {
