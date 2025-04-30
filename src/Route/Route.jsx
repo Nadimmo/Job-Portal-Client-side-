@@ -58,7 +58,7 @@ const Route = createBrowserRouter([
             {
                 path:'/showJobDetails/:id',
                 element: <ShowJobDetails/>,
-                loader: ({params}) => fetch(`http://localhost:5000/showJobDetails/${params.id}`)
+                loader: ({params}) => fetch(`https://job-platform-server-side.vercel.app/showJobDetails/${params.id}`)
             },
             {
                 path:'/allCompanies',
@@ -67,7 +67,7 @@ const Route = createBrowserRouter([
             {
                 path:'/showDetails/:id',
                 element: <ShowDetails/>,
-                loader: ({params}) => fetch(`http://localhost:5000/showDetails/${params.id}`)
+                loader: ({params}) => fetch(`https://job-platform-server-side.vercel.app/showDetails/${params.id}`)
             },
             {
                 path:"/contact",
@@ -110,7 +110,7 @@ const Route = createBrowserRouter([
             {
                 path:"updateJob/:id",
                 element: <AdminRoute><UpdateJob/></AdminRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/updateJob/${params.id}`)
+                loader: ({params}) => fetch(`https://job-platform-server-side.vercel.app/updateJob/${params.id}`)
             },
             {
                 path:"manageBlogs",
@@ -119,7 +119,7 @@ const Route = createBrowserRouter([
             {
                 path:"updateBlog/:id",
                 element: <AdminRoute><UpdateBlog/></AdminRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/updateBlog/${params.id}`)
+                loader: ({params}) => fetch(`https://job-platform-server-side.vercel.app/updateBlog/${params.id}`)
             },
             {
                 path:"manageUsers",

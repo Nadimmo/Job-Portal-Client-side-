@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://job-platform-server-side.vercel.app'
 })
 
 
