@@ -27,6 +27,7 @@ import ShowDetails from '../Page/AllCompanies/ShowDetails';
 import ShowJobDetails from '../Page/AllJobs/ShowJobDetils';
 import Contact from '../Page/Contact/Contact';
 import UsersMessage from '../Page/Dashboard/UsersMessage/UsersMessage';
+import AdminRoute from '../Page/PrivateRoute/AdminRoute';
 
 
 const Route = createBrowserRouter([
@@ -92,45 +93,45 @@ const Route = createBrowserRouter([
             },
             {
                 path:"newJob",
-                element: <AddNewJob/>
+                element: <AdminRoute><AddNewJob/></AdminRoute>
             },
             {
                 path:"newCompany",
-                element: <PostCompany/>
+                element: <AdminRoute><PostCompany/></AdminRoute>
             },
             {
                 path:"newBlogs",
-                element: <LatestBlogsAndNews/>
+                element: <AdminRoute><LatestBlogsAndNews/></AdminRoute>
             },
             {
                 path:"manageJobs",
-                element: <ManageJobs/>
+                element: <AdminRoute><ManageJobs/></AdminRoute>
             },
             {
                 path:"updateJob/:id",
-                element: <UpdateJob/>,
+                element: <AdminRoute><UpdateJob/></AdminRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/updateJob/${params.id}`)
             },
             {
                 path:"manageBlogs",
-                element: <ManageBlogs/>
+                element: <AdminRoute><ManageBlogs/></AdminRoute>
             },
             {
                 path:"updateBlog/:id",
-                element: <UpdateBlog/>,
+                element: <AdminRoute><UpdateBlog/></AdminRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/updateBlog/${params.id}`)
             },
             {
                 path:"manageUsers",
-                element: <ManageUsers/>
+                element: <AdminRoute><ManageUsers/></AdminRoute>
             },
             {
                 path:"allAppliedJobs",
-                element: <AllAppliedJobs/>
+                element: <AdminRoute><AllAppliedJobs/></AdminRoute>
             },
             {
                 path:"usersMessage",
-                element: <UsersMessage/>
+                element: <AdminRoute><UsersMessage/></AdminRoute>
             },
            
         ]
