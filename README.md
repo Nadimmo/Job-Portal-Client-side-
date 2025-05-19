@@ -7,8 +7,8 @@
 ---
 ## Demo Credentials
 ### User Login
-*Email*: newuser@gmail.com  
-*Password*: 1969120
+- *Email*: newuser@gmail.com  
+- *Password*: 1969120
 
 ### Admin Login
 - *Email*: mdnadimmostofa120@gmail.com  
